@@ -1,5 +1,6 @@
-from sqlalchemy import Column, String, Boolean, Float, Integer
+from sqlalchemy import Column, ForeignKey, String, Boolean, Float, Integer, ForeignKey
 from src.infra.sqlalchemy.config.database import Base
+from sqlalchemy.orm import relationship, backref
 
 
 class Produto(Base):
@@ -10,11 +11,20 @@ class Produto(Base):
     detalhes = Column(String)
     preco = Column(Float)
     disponivel = Column(Boolean)
+    tamanho = Column(Float)
+    usuario_id = Column(Integer, ForeignKey('usuario.id', name='fk_usuario'))
+
+    usuario = relationship('Usuario', backref='produtos')
 
 class Usuario(Base):
     __tablename__ = 'usuario'
 
     id = Column(Integer, primary_key=True, index=True)
     nome = Column(String)
+    senha = Column(String)
     telefone = Column(String)
+    produtos = relationship('Produto',  backref='usuario')
+
+
+    
 

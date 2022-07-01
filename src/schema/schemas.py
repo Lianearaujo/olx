@@ -12,6 +12,16 @@ class Usuario(BaseModel):
     class Config:
         orm_mode = True
 
+class UsuarioSimples(BaseModel):
+
+    nome: str
+
+    # meus_produtos: List[Produto]
+    # minhas_vendas: List[Pedido]
+    # meus_pedidos: List[Pedido]
+    class Config:
+        orm_mode = True        
+
 
 class Produto(BaseModel):
     id: Optional[int] = None
