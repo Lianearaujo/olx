@@ -1,4 +1,5 @@
 from src.infra.sqlalchemy.models import models
+from sqlalchemy import select
 from src.schema import schemas
 from .main import RepositorioBase
 
@@ -7,6 +8,7 @@ class RepositorioUsuario(RepositorioBase):
 
     def criar(self, usuario: schemas.Usuario):
         db_usuario = models.Usuario(nome=usuario.nome,
+                                    senha = usuario.senha,
                                     telefone=usuario.telefone)
         self.db.add(db_usuario)
         self.db.commit()
@@ -17,6 +19,3 @@ class RepositorioUsuario(RepositorioBase):
         usuarios = self.db.query(models.Usuario).all()
         return usuarios
 
-
-
-        

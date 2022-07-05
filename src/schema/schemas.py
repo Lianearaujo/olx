@@ -5,6 +5,7 @@ from typing import Optional, List
 class Usuario(BaseModel):
     id: Optional[str] = None
     nome: str
+    senha:str
     telefone: str
     # meus_produtos: List[Produto]
     # minhas_vendas: List[Pedido]

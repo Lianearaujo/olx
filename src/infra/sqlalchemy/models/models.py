@@ -1,6 +1,6 @@
 from sqlalchemy import Column, ForeignKey, String, Boolean, Float, Integer, ForeignKey
 from src.infra.sqlalchemy.config.database import Base
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 
 
 class Produto(Base):
@@ -14,7 +14,7 @@ class Produto(Base):
     tamanho = Column(Float)
     usuario_id = Column(Integer, ForeignKey('usuario.id', name='fk_usuario'))
 
-    usuario = relationship('Usuario', backref='produtos')
+    usuario = relationship('Usuario', back_populates='produtos')
 
 class Usuario(Base):
     __tablename__ = 'usuario'
@@ -23,7 +23,7 @@ class Usuario(Base):
     nome = Column(String)
     senha = Column(String)
     telefone = Column(String)
-    produtos = relationship('Produto',  backref='usuario')
+    produtos = relationship('Produto',  back_populates='usuario')
 
 
     
